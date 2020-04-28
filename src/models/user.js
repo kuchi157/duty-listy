@@ -4,7 +4,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Task = require("../models/task");
 
-const jwt_secret = process.env.JWT_SECRET; //Use same string of JWT SECRET as used in middleware folder auth file
+const jwt_secret = "thingsarequitebad"; //process.env.JWT_SECRET; //while using in production
+//Use same string of JWT SECRET as used in middleware folder auth file
 const userSchema = new mongoose.Schema(
   {
     name: {
