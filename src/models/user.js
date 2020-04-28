@@ -3,6 +3,8 @@ const validator = require("validator");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Task = require("../models/task");
+
+const jwt_secret = process.env.JWT_SECRET; //Use same string of JWT SECRET as used in middleware folder auth file
 const userSchema = new mongoose.Schema(
   {
     name: {
@@ -72,10 +74,7 @@ userSchema.methods.toJSON = function () {
 //generating tokens
 userSchema.methods.generateAuthToken = async function () {
   const user = this;
-  const token = await jwt.sign(
-    { _id: user._id.toString() },
-    "thisismethegreatone"
-  );
+  const token = await jwt.sign({ _id: user._id.toString() }, jwt_secret);
 
   user.tokens = user.tokens.concat({ token });
   await user.save();

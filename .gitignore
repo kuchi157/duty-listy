@@ -1,3 +1,4 @@
-node_modules/
-playground/
+node_modules
+playground
 mongodb.js
+config

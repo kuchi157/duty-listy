@@ -1,10 +1,11 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
+const jwt_secret = process.env.JWT_SECRET; //Enter any string as JWT SECRET
 
 const auth = async (req, res, next) => {
   try {
     const token = req.header("Authorization").replace("Bearer ", "");
-    const decoded = jwt.verify(token, "thisismethegreatone");
+    const decoded = jwt.verify(token, jwt_secret);
     const user = await User.findOne({
       _id: decoded._id,
       "tokens.token": token,
